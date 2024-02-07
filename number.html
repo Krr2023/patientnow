@@ -12,7 +12,7 @@
   const numberElement = document.getElementById("number");
 
   // 建立 WebSocket 連接
-  var socket = new WebSocket("ws://ptnumbernow.netlify.app/");
+  var socket = new WebSocket(process.env.WEBSOCKET_URL);
 
   // 監聽 WebSocket 消息
   socket.onmessage = function(event) {
