@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number Page</title>
+</head>
+<body>
+  <script>
+    // 建立 WebSocket 連接
+    var socket = new WebSocket("ws://localhost:8080");
+
+    // 監聽 WebSocket 消息
+    socket.onmessage = function(event) {
+      // 更新患者排隊號碼
+      var queueNumber = event.data;
+      document.getElementById("queueNumber").innerHTML = queueNumber;
+    };
+  </script>
+
+  <h1>患者排隊號碼</h1>
+  <p id="queueNumber"></p>
+</body>
+</html>
