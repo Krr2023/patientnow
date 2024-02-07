@@ -81,7 +81,7 @@
     // 每秒更新時間
     setInterval(updateTime, 1000);
     // 建立 WebSocket 連接
-    var socket = new WebSocket("ws://localhost:8080");
+    var socket = new WebSocket("ws://ptnumbernow.netlify.app/");
 
     // 監聽 WebSocket 消息
     socket.onmessage = function(event) {
