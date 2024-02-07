@@ -1,94 +1,64 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>即時看診數字</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Number</title>
 </head>
 <body>
- <p id="time"></p>
- <input type="number" id="number-input">
- <p id="number"></p>
- <button id="add">加一</button>
- <button id="subtract">減一</button>
- <div id="number"></div>
- <script>
-  const timeElement = document.getElementById("time");
-  const numberInput = document.getElementById("number-input");
-  const numberElement = document.getElementById("number");
-  const addButton = document.getElementById("add");
-  const subtractButton = document.getElementById("subtract");
+    <div id="time"></div>
+    <div id="number"></div>
+    <button onclick="incrementNumber()">增加数字</button>
+    <button onclick="allowInput()">允许输入数字</button>
 
-  // 顯示現在時間
-  function updateTime() {
-   const now = new Date();
-   timeElement.textContent = now.toLocaleString();
-  }
+    <script>
+        // 获取显示时间的元素
+        const timeElement = document.getElementById('time');
+        // 获取显示数字的元素
+        const numberElement = document.getElementById('number');
+        // 初始化数字
+        let number = 0;
+        // 标记是否允许用户输入数字
+        let allowInputFlag = false;
 
-  // 設定初始數字
-  let number = 0;
+        // 更新时间
+        function updateTime() {
+            const now = new Date();
+            timeElement.innerText = now.toLocaleTimeString();
+        }
 
-  // 更新數字
-  function updateNumber() {
-   numberElement.textContent = number;
-  }
+        // 增加数字
+        function incrementNumber() {
+            number++;
+            updateNumber();
+        }
 
-  // 加一
-  addButton.addEventListener("click", () => {
-   number++;
-   updateNumber();
+        // 更新数字显示
+        function updateNumber() {
+            numberElement.innerText = number;
+        }
 
-   // 上傳伺服器
-   fetch("/api/update-number", {
-    method: "POST",
-    body: JSON.stringify({ number }),
-   });
-  });
+        // 允许用户输入数字
+        function allowInput() {
+            allowInputFlag = true;
+            const input = prompt('请输入一个数字：');
+            if (input !== null) {
+                number = parseInt(input);
+                updateNumber();
+            }
+        }
 
-  // 減一
-  subtractButton.addEventListener("click", () => {
-   number--;
-   updateNumber();
+        // 每秒更新时间
+        setInterval(updateTime, 1000);
 
-   // 上傳伺服器
-   fetch("/api/update-number", {
-    method: "POST",
-    body: JSON.stringify({ number }),
-   });
-  });
-
-  // 使用者輸入數字
-  numberInput.addEventListener("input", () => {
-   const inputNumber = parseInt(numberInput.value);
-   if (isNaN(inputNumber)) {
-    return;
-   }
-
-   number = inputNumber;
-   updateNumber();
-
-   // 上傳伺服器
-   fetch("/api/update-number", {
-    method: "POST",
-    body: JSON.stringify({ number }),
-   });
-  });
-
-  // 初始化
-  updateTime();
-  updateNumber();
-
-  // 每秒更新時間
-  setInterval(updateTime, 1000);
-
-   // 使用 EventSource 进行服务器发送事件 (SSE)
+        // 使用 EventSource 进行服务器发送事件 (SSE)
         const eventSource = new EventSource('/updates');
         eventSource.onmessage = function(event) {
             if (allowInputFlag) {
                 number = parseInt(event.data);
                 updateNumber();
             }
-                };
- </script>
+        };
+    </script>
 </body>
 </html>
