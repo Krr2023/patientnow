@@ -8,18 +8,12 @@
 <body>
  <p id="number"></p>
 
- <script>
-  const numberElement = document.getElementById("number");
-
-  // 建立 EventSource 連接
-  const eventSource = new EventSource("/sse");
-
-  // 監聽事件
-  eventSource.addEventListener("message", (event) => {
-   // 更新患者排隊號碼
-   var queueNumber = event.data;
-   numberElement.innerHTML = queueNumber;
-  });
+  <script>
+    const eventSource = new EventSource("http://localhost:3000");
+    eventSource.addEventListener("number", (event) => {
+      const number = event.data;
+      document.getElementById("number").textContent = number;
+    });
  </script>
 </body>
 </html>
