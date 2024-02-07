@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>即時看診數字</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Number</title>
 </head>
 <body>
- <p id="number"></p>
+    <div id="number"></div>
 
-  <script>
-    const eventSource = new EventSource(""https://ptnumbernow.netlify.app/number.html");
-    eventSource.addEventListener("number", (event) => {
-      const number = event.data;
-      document.getElementById("number").textContent = number;
-    });
- </script>
+    <script>
+        // 获取显示数字的元素
+        const numberElement = document.getElementById('number');
+
+        // 使用 EventSource 进行服务器发送事件 (SSE)
+        const eventSource = new EventSource('/updates');
+        eventSource.onmessage = function(event) {
+            numberElement.innerText = event.data;
+        };
+    </script>
 </body>
 </html>
