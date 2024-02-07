@@ -9,7 +9,7 @@
  <p id="number"></p>
 
   <script>
-    const eventSource = new EventSource("http://localhost:3000");
+    const eventSource = new EventSource(""https://ptnumbernow.netlify.app/number.html");
     eventSource.addEventListener("number", (event) => {
       const number = event.data;
       document.getElementById("number").textContent = number;
