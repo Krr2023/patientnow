@@ -80,6 +80,15 @@
 
     // 每秒更新時間
     setInterval(updateTime, 1000);
+    // 建立 WebSocket 連接
+    var socket = new WebSocket("ws://localhost:8080");
+
+    // 監聽 WebSocket 消息
+    socket.onmessage = function(event) {
+      // 更新患者排隊號碼
+      var queueNumber = event.data;
+      document.getElementById("queueNumber").innerHTML = queueNumber;
+    };
   </script>
 </body>
 </html>
