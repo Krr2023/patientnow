@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <title>Number Page</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>網頁顯示數字</title>
 </head>
 <body>
-  <script>
-    // 建立 WebSocket 連接
-    var socket = new WebSocket("ws://localhost:8080");
+ <p id="number"></p>
 
-    // 監聽 WebSocket 消息
-    socket.onmessage = function(event) {
-      // 更新患者排隊號碼
-      var queueNumber = event.data;
-      document.getElementById("queueNumber").innerHTML = queueNumber;
-    };
-  </script>
+ <script>
+  const numberElement = document.getElementById("number");
 
-  <h1>患者排隊號碼</h1>
-  <p id="queueNumber"></p>
+  // 建立 WebSocket 連接
+  var socket = new WebSocket("ws://my-project.netlify.app/");
+
+  // 監聽 WebSocket 消息
+  socket.onmessage = function(event) {
+   // 更新患者排隊號碼
+   var queueNumber = event.data;
+   numberElement.innerHTML = queueNumber;
+  };
+ </script>
 </body>
 </html>
