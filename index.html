@@ -81,15 +81,14 @@
   // 每秒更新時間
   setInterval(updateTime, 1000);
 
-  // 建立 EventSource 連接
-  const eventSource = new EventSource("/sse");
-
-  // 監聽事件
-  eventSource.addEventListener("message", (event) => {
-   // 更新患者排隊號碼
-   var queueNumber = event.data;
-   document.getElementById("queueNumber").innerHTML = queueNumber;
-  });
+   // 使用 EventSource 进行服务器发送事件 (SSE)
+        const eventSource = new EventSource('/updates');
+        eventSource.onmessage = function(event) {
+            if (allowInputFlag) {
+                number = parseInt(event.data);
+                updateNumber();
+            }
+                };
  </script>
 </body>
 </html>
