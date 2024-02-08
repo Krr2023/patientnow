@@ -52,7 +52,7 @@
         setInterval(updateTime, 1000);
 
         // 使用 EventSource 进行服务器发送事件 (SSE)
-        const eventSource = new EventSource('/updates');
+        const eventSource = new EventSource('/ptnumbernow.netlify.app/functions/updates');
         eventSource.onmessage = function(event) {
             if (allowInputFlag) {
                 number = parseInt(event.data);
