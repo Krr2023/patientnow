@@ -13,7 +13,7 @@
         const numberElement = document.getElementById('number');
 
         // 使用 EventSource 进行服务器发送事件 (SSE)
-        const eventSource = new EventSource('/ptnumbernow.netlify.app/functions/updates');
+        const eventSource = new EventSource('/functions/updates.js');
         eventSource.onmessage = function(event) {
             numberElement.innerText = event.data;
         };
