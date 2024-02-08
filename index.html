@@ -48,17 +48,6 @@
             }
         }
 
-        // 每秒更新时间
-        setInterval(updateTime, 1000);
-
-        // 使用 EventSource 进行服务器发送事件 (SSE)
-        const eventSource = new EventSource('https://ptnumbernow.netlify.app/functions/updates.js');
-        eventSource.onmessage = function(event) {
-            if (allowInputFlag) {
-                number = parseInt(event.data);
-                updateNumber();
-            }
-        };
             <h1>Real-time Number Input</h1>
     <input type="number" id="numberInput">
     <button onclick="updateNumber()">Update Number</button>
