@@ -31,6 +31,8 @@
         function incrementNumber() {
             number++;
             updateNumber();
+            // 向服务器端发送更新请求（这里假设使用 Ajax 技术）
+            sendUpdateToServer(number);
         }
 
         // 更新数字显示
@@ -45,20 +47,22 @@
             if (input !== null) {
                 number = parseInt(input);
                 updateNumber();
+                // 向服务器端发送更新请求（这里假设使用 Ajax 技术）
+                sendUpdateToServer(number);
             }
         }
 
-            <h1>Real-time Number Input</h1>
-    <input type="number" id="numberInput">
-    <button onclick="updateNumber()">Update Number</button>
-
-    
-        function updateNumber() {
-            const number = document.getElementById('numberInput').value;
-            window.location.href = `/functions/realtime?number=${number}`;
+        // 向服务器端发送更新请求
+        function sendUpdateToServer(number) {
+            // 使用 Ajax 技术向服务器端发送更新请求
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/updateNumber');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({ number: number }));
         }
 
-
+        // 每秒更新时间
+        setInterval(updateTime, 1000);
     </script>
 </body>
 </html>
