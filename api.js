@@ -1,25 +1,17 @@
-const express = require("express");
-const app = express();
+const fs = require('fs');
 
-// 上傳數字
-app.post("/api/update-number", (req, res) => {
-  const { number } = req.body;
+const randomNumber = Math.floor(Math.random() * 100);
 
-  // 儲存數字
-
-  // 傳送 SSE 事件
-  const event = new EventSource("/api/sse");
-  event.send(JSON.stringify({ number }));
-
-  res.send();
+fs.writeFile('number.html', `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number</title>
+</head>
+<body>
+  <h1>${randomNumber}</h1>
+</body>
+</html>`, (err) => {
+  if (err) throw err;
+  console.log('Number updated!');
 });
-
-// SSE 事件
-app.get("/api/sse", (req, res) => {
-  res.writeHead(200, {
-    "Content-Type": "text/event-stream",
-    "Connection": "keep-alive",
-    "Cache-Control": "no-cache",
-  });
-
-  // 每秒傳送一次數字
