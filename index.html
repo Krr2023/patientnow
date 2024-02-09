@@ -33,7 +33,7 @@
       numberElement.textContent = number;
 
       // 建立 SSE 事件
-  const event = new EventSource("/api/sse");
+  const event = new EventSource("number.html");
 
 event.addEventListener("message", (e) => {
   const data = JSON.parse(e.data);
