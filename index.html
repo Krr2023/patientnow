@@ -38,11 +38,7 @@
       number++;
       updateNumber();
 
-      // 上傳伺服器
-      fetch("/api/update-number", {
-        method: "POST",
-        body: JSON.stringify({ number }),
-      });
+      
     });
 
     // 減一
@@ -50,11 +46,6 @@
       number--;
       updateNumber();
 
-      // 上傳伺服器
-      fetch("/api/update-number", {
-        method: "POST",
-        body: JSON.stringify({ number }),
-      });
     });
 
     // 使用者輸入數字
@@ -67,11 +58,6 @@
       number = inputNumber;
       updateNumber();
 
-      // 上傳伺服器
-      fetch("/api/update-number", {
-        method: "POST",
-        body: JSON.stringify({ number }),
-      });
     });
 
     // 初始化
