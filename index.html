@@ -1,68 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dynamic Number</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>網頁顯示時間和數字</title>
 </head>
 <body>
-    <div id="time"></div>
-    <div id="number"></div>
-    <button onclick="incrementNumber()">增加数字</button>
-    <button onclick="allowInput()">允许输入数字</button>
+  <p id="time"></p>
+  <input type="number" id="number-input">
+  <p id="number"></p>
+  <button id="add">加一</button>
+  <button id="subtract">減一</button>
 
-    <script>
-        // 获取显示时间的元素
-        const timeElement = document.getElementById('time');
-        // 获取显示数字的元素
-        const numberElement = document.getElementById('number');
-        // 初始化数字
-        let number = 0;
-        // 标记是否允许用户输入数字
-        let allowInputFlag = false;
+  <script>
+    const timeElement = document.getElementById("time");
+    const numberInput = document.getElementById("number-input");
+    const numberElement = document.getElementById("number");
+    const addButton = document.getElementById("add");
+    const subtractButton = document.getElementById("subtract");
 
-        // 更新时间
-        function updateTime() {
-            const now = new Date();
-            timeElement.innerText = now.toLocaleTimeString();
-        }
+    // 顯示現在時間
+    function updateTime() {
+      const now = new Date();
+      timeElement.textContent = now.toLocaleString();
+    }
 
-        // 增加数字
-        function incrementNumber() {
-            number++;
-            updateNumber();
-            // 向服务器端发送更新请求（这里假设使用 Ajax 技术）
-            sendUpdateToServer(number);
-        }
+    // 設定初始數字
+    let number = 0;
 
-        // 更新数字显示
-        function updateNumber() {
-            numberElement.innerText = number;
-        }
+    // 更新數字
+    function updateNumber() {
+      numberElement.textContent = number;
 
-        // 允许用户输入数字
-        function allowInput() {
-            allowInputFlag = true;
-            const input = prompt('请输入一个数字：');
-            if (input !== null) {
-                number = parseInt(input);
-                updateNumber();
-                // 向服务器端发送更新请求（这里假设使用 Ajax 技术）
-                sendUpdateToServer(number);
-            }
-        }
+      // 建立 SSE 事件
+      const event = new EventSource("/api/sse");
 
-        // 向服务器端发送更新请求
-        function sendUpdateToServer(number) {
-            // 使用 Ajax 技术向服务器端发送更新请求
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', '/updateNumber');
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.send(JSON.stringify({ number: number }));
-        }
+      // 監聽 SSE 事件
+      event.addEventListener("message", (e) => {
+        const data = JSON.parse(e.data);
+        number = data.number;
+        updateNumber();
+      });
+    }
 
-        // 每秒更新时间
-        setInterval(updateTime, 1000);
-    </script>
+    // 加一
+    addButton.addEventListener("click", () => {
+      number++;
+      updateNumber();
+
+      // 上傳伺服器
+      fetch("/api/update-number", {
+        method: "POST",
+        body: JSON.stringify({ number }),
+      });
+    });
+
+    // 減一
+    subtractButton.addEventListener("click", () => {
+      number--;
+      updateNumber();
+
+      // 上傳伺服器
+      fetch("/api/update-number", {
+        method: "POST",
+        body: JSON.stringify({ number }),
+      });
+    });
+
+    // 使用者輸入數字
+    numberInput.addEventListener("input", () => {
+      const inputNumber = parseInt(numberInput.value);
+      if (isNaN(inputNumber)) {
+        return;
+      }
+
+      number = inputNumber;
+      updateNumber();
+
+      // 上傳伺服器
+      fetch("/api/update-number", {
+        method: "POST",
+        body: JSON.stringify({ number }),
+      });
+    });
+
+    // 初始化
+    updateTime();
+    updateNumber();
+
+    // 每秒更新時間
+    setInterval(updateTime, 1000);
+  </script>
 </body>
 </html>
