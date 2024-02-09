@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const randomNumber = Math.floor(Math.random() * 100);
 
-fs.writeFile('number.html', `<!DOCTYPE html>
+fs.writeFile('num.html', `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
