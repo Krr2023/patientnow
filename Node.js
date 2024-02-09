@@ -1,17 +1,25 @@
-const http = require("http");
+const express = require("express");
+const app = express();
 
-const server = http.createServer((req, res) => {
- // 設置 SSE 標頭
- res.writeHead(200, {
-  "Content-Type": "text/event-stream",
-  "Connection": "keep-alive",
- });
+// 上傳數字
+app.post("/api/update-number", (req, res) => {
+  const { number } = req.body;
 
- // 每秒推送一個事件
- setInterval(() => {
-  const number = Math.floor(Math.random() * 100);
-  res.write(`event: number\ndata: ${number}\n\n`);
- }, 1000);
+  // 儲存數字
+
+  // 傳送 SSE 事件
+  const event = new EventSource("/api/sse");
+  event.send(JSON.stringify({ number }));
+
+  res.send();
 });
 
-server.listen(3000);
+// SSE 事件
+app.get("/api/sse", (req, res) => {
+  res.writeHead(200, {
+    "Content-Type": "text/event-stream",
+    "Connection": "keep-alive",
+    "Cache-Control": "no-cache",
+  });
+
+  // 每秒傳送一次數字
