@@ -1,0 +1,61 @@
+name: Update number.html
+
+
+
+on:
+
+  push:
+
+    branches:
+
+      - main
+
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+
+
+    steps:
+
+      - uses: actions/checkout@v2
+
+
+
+      - name: Install Node.js
+
+        uses: actions/setup-node@v2
+
+        with:
+
+          node-version: 16
+
+
+
+      - name: Get number
+
+        run: echo "number=$(getNumber)" >> $GITHUB_ENV
+
+
+
+      - name: Update number.html
+
+        run: |
+
+          sed -i "s/{{number}}/$(echo $number)/g" number.html
+
+
+
+      - name: Commit and push changes
+
+        run: |
+
+          git add number.html
+
+          git commit -m "Update number.html"
+
+          git push
