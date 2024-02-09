@@ -15,8 +15,8 @@ jobs:
 
       - name: Set up Git user name and email
         run: |
-          git config --global user.email "krr163play@gmail.com"
-          git config --global user.name "krr2023"
+          git config --global user.email "you@example.com"
+          git config --global user.name "Your Name"
 
       - name: Install Node.js
         uses: actions/setup-node@v2
@@ -33,5 +33,6 @@ jobs:
       - name: Commit and push changes
         run: |
           git add number.html
+          git diff --staged  # For debugging, to see the changes being staged
           git commit -m "Update number.html"
           git push
