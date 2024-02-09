@@ -80,6 +80,14 @@
 
     // 每秒更新時間
     setInterval(updateTime, 1000);
+
+    // 呼叫 my-application.yaml
+    fetch("/.github/workflows/my-application.yaml")
+      .then((response) => response.text())
+      .then((text) => {
+        const yaml = JSON.parse(text);
+        console.log(yaml);
+      });
   </script>
 </body>
 </html>
