@@ -1,4 +1,4 @@
-name: Update number.html
+name: Update num.html
 
 on:
   push:
@@ -26,13 +26,13 @@ jobs:
       - name: Get number
         run: echo "number=$(getNumber)" >> $GITHUB_ENV
 
-      - name: Update number.html
+      - name: Update num.html
         run: |
-          sed -i 's/number/number/g' number.html
+          sed -i 's/number/number/g' num.html
 
       - name: Commit and push changes
         run: |
-          git add number.html
+          git add num.html
           git diff --staged  # For debugging, to see the changes being staged
-          git commit -m "Update number.html"
+          git commit -m "Update num.html"
           git push
