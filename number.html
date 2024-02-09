@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-time Number</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>顯示數字</title>
 </head>
 <body>
-    <div id="number"></div>
+  <p id="number"></p>
 
-    <script>
-        // 获取显示数字的元素
-        const numberElement = document.getElementById('number');
+  <script>
+    const numberElement = document.getElementById("number");
 
-        // 使用 EventSource 进行服务器发送事件 (SSE)
-        const eventSource = new EventSource('https://ptnumbernow.netlify.app/functions/updates.js');
-        eventSource.onmessage = function(event) {
-            numberElement.innerText = event.data;
-        };
-    </script>
+    // 建立 SSE 事件
+    const event = new EventSource("/api/sse");
+
+    // 監聽 SSE 事件
+    event.addEventListener("message", (e) => {
+      const data = JSON.parse(e.data);
+      numberElement.textContent = data.number;
+    });
+  </script>
 </body>
 </html>
