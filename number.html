@@ -6,32 +6,23 @@
   <title>顯示數字</title>
 </head>
 <body>
-  <p id="time"></p>
-  <p>優植牙醫現在看診號碼</p>
+  <p>數字：</p>
   <p id="number"></p>
-  <p>看診醫師王志綱</p>
 
   <script>
-    const timeElement = document.getElementById("time");
     const numberElement = document.getElementById("number");
 
-    // 顯示現在時間
-    function updateTime() {
-      const now = new Date();
-      timeElement.textContent = now.toLocaleString();
-    }
+    // 顯示數字
+    const showNumber = (number) => {
+      numberElement.textContent = number;
+    };
 
-    // 建立 SSE 事件
-    const event = new EventSource("/api/sse");
-
-    // 監聽 SSE 事件
+    // 使用 EventSource 監聽 /api/number 事件
+    const event = new EventSource("/api/number");
     event.addEventListener("message", (e) => {
       const data = JSON.parse(e.data);
-      numberElement.textContent = data.number;
+      showNumber(data.number);
     });
-
-    // 初始化
-    updateTime();
   </script>
 </body>
 </html>
