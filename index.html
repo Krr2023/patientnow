@@ -37,15 +37,12 @@
     addButton.addEventListener("click", () => {
       number++;
       updateNumber();
-
-      
     });
 
     // 減一
     subtractButton.addEventListener("click", () => {
       number--;
       updateNumber();
-
     });
 
     // 使用者輸入數字
@@ -57,8 +54,12 @@
 
       number = inputNumber;
       updateNumber();
-
     });
+
+    // 新增获取数字的函数
+    function getNumber() {
+      return number;
+    }
 
     // 初始化
     updateTime();
@@ -66,14 +67,6 @@
 
     // 每秒更新時間
     setInterval(updateTime, 1000);
-
-    // 呼叫 my-application.yaml
-    fetch("/.github/workflows/main.yaml")
-      .then((response) => response.text())
-      .then((text) => {
-        const yaml = JSON.parse(text);
-        console.log(yaml);
-      });
   </script>
 </body>
 </html>
