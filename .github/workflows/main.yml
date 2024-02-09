@@ -28,7 +28,7 @@ jobs:
 
       - name: Update number.html
         run: |
-          sed -i 's/number/number/g" number.html
+          sed -i 's/number/number/g' number.html
 
       - name: Commit and push changes
         run: |
