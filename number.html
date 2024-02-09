@@ -16,13 +16,6 @@
     const showNumber = (number) => {
       numberElement.textContent = number;
     };
-
-    // 使用 EventSource 監聽 /api/number 事件
-    const event = new EventSource("/api/number");
-    event.addEventListener("message", (e) => {
-      const data = JSON.parse(e.data);
-      showNumber(data.number);
-    });
   </script>
 </body>
 </html>
