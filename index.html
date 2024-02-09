@@ -31,17 +31,6 @@
     // 更新數字
     function updateNumber() {
       numberElement.textContent = number;
-
-      // 建立 SSE 事件
-  const event = new EventSource("/number.html");
-
-event.addEventListener("message", (e) => {
-  const data = JSON.parse(e.data);
-  // 將數字傳送到 number.html
-  const numberElement = document.getElementById("number");
-  numberElement.textContent = data.number;
-});
-
     }
 
     // 加一
@@ -50,7 +39,7 @@ event.addEventListener("message", (e) => {
       updateNumber();
 
       // 上傳伺服器
-      fetch("/number.html", {
+      fetch("/api/update-number", {
         method: "POST",
         body: JSON.stringify({ number }),
       });
@@ -62,7 +51,7 @@ event.addEventListener("message", (e) => {
       updateNumber();
 
       // 上傳伺服器
-      fetch("/number.html", {
+      fetch("/api/update-number", {
         method: "POST",
         body: JSON.stringify({ number }),
       });
@@ -79,7 +68,7 @@ event.addEventListener("message", (e) => {
       updateNumber();
 
       // 上傳伺服器
-      fetch("/number.html", {
+      fetch("/api/update-number", {
         method: "POST",
         body: JSON.stringify({ number }),
       });
