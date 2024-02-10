@@ -1,0 +1,27 @@
+name: Get Number
+
+on:
+  workflow_dispatch:
+
+jobs:
+  get-number:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Get number
+      run: |
+        curl -X GET https://api.netlify.com/api/v1/sites/YOUR_SITE_ID/functions/get-number
+
+    - name: Save number
+      run: |
+        echo ${{ steps.get-number.outputs.number }} > num.txt
+
+    - name: Deploy num.html
+      uses: netlify/actions/deploy@v1
+        with:
+          site_id: YOUR_SITE_ID
+          authToken: YOUR_ACCESS_TOKEN
+          production: true
+
