@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>網頁顯示時間和數字</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>網頁顯示時間和數字</title>
 </head>
 <body>
 <h1>優植牙醫診所</h1>
@@ -16,59 +16,59 @@
  <button id="subtract">減一</button>
 
  <script>
-  const timeElement = document.getElementById("time");
-  const numberInput = document.getElementById("number-input");
-  const numberElement = document.getElementById("number");
-  const addButton = document.getElementById("add");
-  const subtractButton = document.getElementById("subtract");
+ const timeElement = document.getElementById("time");
+ const numberInput = document.getElementById("number-input");
+ const numberElement = document.getElementById("number");
+ const addButton = document.getElementById("add");
+ const subtractButton = document.getElementById("subtract");
 
-  let number = 0;
+ let number = 0;
 
-  // 顯示現在時間
-  function updateTime() {
-   const now = new Date();
-   timeElement.textContent = now.toLocaleString();
-  }
+ // 顯示現在時間
+ function updateTime() {
+  const now = new Date();
+  timeElement.textContent = now.toLocaleString();
+ }
 
-  // 更新數字
-  function updateNumber() {
-   numberElement.textContent = number;
-  }
+ // 更新數字
+ function updateNumber() {
+  numberElement.textContent = number;
+ }
 
-  // 加一
-  addButton.addEventListener("click", () => {
-   number++;
-   updateNumber();
-  });
-
-  // 減一
-  subtractButton.addEventListener("click", () => {
-   number--;
-   updateNumber();
-  });
-
-  // 使用者輸入數字
-  numberInput.addEventListener("input", () => {
-   const inputNumber = parseInt(numberInput.value, 10);
-   if (isNaN(inputNumber)) {
-    return;
-   }
-
-   number = inputNumber;
-   updateNumber();
-  });
-
-  // 新增获取数字的函数
-  function getNumber() {
-   return number;
-  }
-
-  // 初始化
-  updateTime();
+ // 加一
+ addButton.addEventListener("click", () => {
+  number++;
   updateNumber();
+ });
 
-  // 每秒更新時間
-  setInterval(updateTime, 1000);
+ // 減一
+ subtractButton.addEventListener("click", () => {
+  number--;
+  updateNumber();
+ });
+
+ // 使用者輸入數字
+ numberInput.addEventListener("input", () => {
+  const inputNumber = parseInt(numberInput.value, 10);
+  if (isNaN(inputNumber)) {
+  return;
+  }
+
+  number = inputNumber;
+  updateNumber();
+ });
+
+ // 新增获取数字的函数
+ function getNumber() {
+  return number;
+ }
+
+ // 初始化
+ updateTime();
+ updateNumber();
+
+ // 每秒更新時間
+ setInterval(updateTime, 1000);
  </script>
 </body>
 </html>
