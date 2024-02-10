@@ -14,7 +14,7 @@
 <script>
 const numberForm = document.getElementById("number-form");
 
-// 提交表單時將數字發送到 localStorage
+// 提交表單時將數字發送到 rec.js
 numberForm.addEventListener("submit", (event) => {
     event.preventDefault(); // 防止表單提交刷新頁面
 
@@ -23,8 +23,8 @@ numberForm.addEventListener("submit", (event) => {
         return;
     }
 
-    // 將數字存儲到 localStorage
-    localStorage.setItem("userNumber", number.toString());
+    // 將數字發送到 rec.js
+    window.parent.postMessage(number, "*");
 });
 </script>
 </body>
