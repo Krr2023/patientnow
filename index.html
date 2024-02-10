@@ -1,76 +1,74 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>網頁顯示時間和數字</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>網頁顯示時間和數字</title>
 </head>
 <body>
 <h1>優植牙醫診所</h1>
-  <h2>王志綱醫師</h2>
-  <h3>現在看診號碼</h3>
-  <p id="time"></p>
-  <input type="number" id="number-input">
-  <p id="number"></p>
-  <button id="add">加一</button>
-  <button id="subtract">減一</button>
+ <h2>王志綱醫師</h2>
+ <h3>現在看診號碼</h3>
+ <p id="time"></p>
+ <input type="number" id="number-input" value="0">
+ <p id="number"></p>
+ <button id="add">加一</button>
+ <button id="subtract">減一</button>
 
-  <script>
-    const timeElement = document.getElementById("time");
-    const numberInput = document.getElementById("number-input");
-    const numberElement = document.getElementById("number");
-    const addButton = document.getElementById("add");
-    const subtractButton = document.getElementById("subtract");
+ <script>
+  const timeElement = document.getElementById("time");
+  const numberInput = document.getElementById("number-input");
+  const numberElement = document.getElementById("number");
+  const addButton = document.getElementById("add");
+  const subtractButton = document.getElementById("subtract");
 
-    
-    // 顯示現在時間
-    function updateTime() {
-      const now = new Date();
-      timeElement.textContent = now.toLocaleString();
-    }
+  let number = 0;
 
-    // 設定初始數字
-    let number = 0;
+  // 顯示現在時間
+  function updateTime() {
+   const now = new Date();
+   timeElement.textContent = now.toLocaleString();
+  }
 
-    // 更新數字
-    function updateNumber() {
-      numberElement.textContent = number;
-    }
+  // 更新數字
+  function updateNumber() {
+   numberElement.textContent = number;
+  }
 
-    // 加一
-    addButton.addEventListener("click", () => {
-      number++;
-      updateNumber();
-    });
+  // 加一
+  addButton.addEventListener("click", () => {
+   number++;
+   updateNumber();
+  });
 
-    // 減一
-    subtractButton.addEventListener("click", () => {
-      number--;
-      updateNumber();
-    });
+  // 減一
+  subtractButton.addEventListener("click", () => {
+   number--;
+   updateNumber();
+  });
 
-    // 使用者輸入數字
-    numberInput.addEventListener("input", () => {
-      const inputNumber = parseInt(numberInput.value);
-      if (isNaN(inputNumber)) {
-        return;
-      }
+  // 使用者輸入數字
+  numberInput.addEventListener("input", () => {
+   const inputNumber = parseInt(numberInput.value, 10);
+   if (isNaN(inputNumber)) {
+    return;
+   }
 
-      number = inputNumber;
-      updateNumber();
-    });
+   number = inputNumber;
+   updateNumber();
+  });
 
-    // 新增获取数字的函数
-    function getNumber() {
-      return number;
-    }
+  // 新增获取数字的函数
+  function getNumber() {
+   return number;
+  }
 
-    // 初始化
-    updateTime();
-    updateNumber();
+  // 初始化
+  updateTime();
+  updateNumber();
 
-    // 每秒更新時間
-    setInterval(updateTime, 1000);
-  </script>
+  // 每秒更新時間
+  setInterval(updateTime, 1000);
+ </script>
 </body>
 </html>
