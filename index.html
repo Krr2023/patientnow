@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>網頁顯示時間和數字</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>網頁顯示時間和數字</title>
 </head>
 <body>
 <h1>優植牙醫診所</h1>
@@ -63,6 +63,17 @@
 
  // 將使用者輸入的數值儲存至 localStorage
  localStorage.setItem("userNumber", userNumber);
+
+ // 將使用者輸入的數值送出至 Netlify API
+ fetch("/api/store-number", {
+ method: "POST",
+ headers: {
+ "Content-Type": "application/json",
+ },
+ body: JSON.stringify({
+ number: userNumber,
+ }),
+ });
  });
 
  // 新增获取数字的函数
@@ -77,5 +88,10 @@
  // 每秒更新時間
  setInterval(updateTime, 1000);
  </script>
+
+<form action="/api/store-number" method="post">
+ <input type="number" name="number">
+ <button type="submit">提交</button>
+</form>
 </body>
 </html>
