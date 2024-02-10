@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>網頁顯示時間和數字</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>網頁顯示時間和數字</title>
 </head>
 <body>
-<h1>優植牙醫診所</h1>
- <h2>王志綱醫師</h2>
- <h3>現在看診號碼</h3>
- <p id="time"></p>
+  <h1>優植牙醫診所</h1>
+  <h2>王志綱醫師</h2>
+  <h3>現在看診號碼</h3>
+  <p id="time"></p>
 
- <span id="num"></span>
+  <span id="num"></span>
 
- <script>
-  const timeElement = document.getElementById("time");
-  const numElement = document.getElementById("num");
+  <script>
+    const timeElement = document.getElementById("time");
+    const numElement = document.getElementById("num");
 
-  // 顯示現在時間
-  function updateTime() {
-   const now = new Date();
-   timeElement.textContent = now.toLocaleString();
-  }
+    // 顯示現在時間
+    function updateTime() {
+      const now = new Date();
+      timeElement.textContent = now.toLocaleString();
+    }
 
-  // 初始化
-  updateTime();
+    // 初始化
+    updateTime();
 
-  // 每秒更新時間
-  setInterval(updateTime, 1000);
+    // 每秒更新時間
+    setInterval(updateTime, 1000);
 
-  // 接收來自 num.html 的消息
-  window.addEventListener("message", (event) => {
-   const number = event.data;
+    // 接收來自 num.html 的消息
+    window.addEventListener("message", (event) => {
+      const number = event.data;
 
-   // 更新顯示的數字
-   numElement.textContent = number;
-  });
- </script>
+      // 更新顯示的數字
+      numElement.textContent = number;
+    });
+  </script>
 </body>
 </html>
