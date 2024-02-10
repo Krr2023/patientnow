@@ -1,35 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>優植牙醫診所看診進度</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>優植牙醫診所看診進度</title>
 </head>
 <body>
-<h1>優植牙醫診所</h1>
-<h2>王志綱醫師</h2>
-<h3>現在看診號碼</h3>
- <script>
-  const numberElement = document.getElementById("number");
+  <h1>優植牙醫診所</h1>
+  <h2>王志綱醫師</h2>
+  <h3>現在看診號碼</h3>
+  <p id="number"></p>
 
- // 顯示現在時間
- const showTime = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1;
-  const day = now.getDate();
-  const hour = now.getHours();
-  const minute = now.getMinutes();
-  const second = now.getSeconds();
-  numberElement.textContent = `現在時間：${year}年${month}月${day}日 ${hour}:${minute}:${second}`;
- };
+  <script>
+    const numberElement = document.getElementById("number");
 
- // 每秒更新時間
- setInterval(showTime, 1000);
- 
-  
- <p id="number"></p>
+    // 顯示現在時間
+    const showTime = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = now.getMonth() + 1;
+      const day = now.getDate();
+      const hour = now.getHours();
+      const minute = now.getMinutes();
+      const second = now.getSeconds();
+      numberElement.textContent = `現在時間：${year}年${month}月${day}日 ${hour}:${minute}:${second}`;
+    };
 
-</script>
+    // 每秒更新時間
+    setInterval(showTime, 1000);
+  </script>
 </body>
 </html>
