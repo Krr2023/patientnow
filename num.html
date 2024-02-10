@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>輸入號碼</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>輸入號碼</title>
 </head>
 <body>
-  <form id="number-form">
-    <input type="number" id="user-input" name="number">
-    <button type="submit">提交</button>
-  </form>
+<form id="number-form">
+<input type="number" id="user-input" name="number">
+<button type="submit">提交</button>
+</form>
 
-  <script>
-    const numberForm = document.getElementById("number-form");
+<script>
+const numberForm = document.getElementById("number-form");
 
-    // 提交表單時將數字發送到 index.html
-    numberForm.addEventListener("submit", (event) => {
-      event.preventDefault(); // 防止表單提交刷新頁面
+// 提交表單時將數字發送到 localStorage
+numberForm.addEventListener("submit", (event) => {
+    event.preventDefault(); // 防止表單提交刷新頁面
 
-      // 在事件處理函數內部添加 console.log 來檢查事件是否被觸發
-      console.log("Submit button clicked!");
-
-      const number = parseInt(document.getElementById("user-input").value, 10);
-      if (isNaN(number)) {
+    const number = parseInt(document.getElementById("user-input").value, 10);
+    if (isNaN(number)) {
         return;
-      }
+    }
 
-      // 將數字發送到 index.html
-      window.parent.postMessage(number, "C:\Users\Home\Desktop\now\index.html");
-
-      // 記錄發送的數字
-      console.log("Sent number:", number);
-    });
-  </script>
+    // 將數字存儲到 localStorage
+    localStorage.setItem("userNumber", number.toString());
+});
+</script>
 </body>
 </html>
