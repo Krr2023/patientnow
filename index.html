@@ -10,8 +10,11 @@
  <h2>王志綱醫師</h2>
  <h3>現在看診號碼</h3>
  <p id="time"></p>
- <input type="number" id="number-input" value="0">
- <p id="number"></p>
+
+<input type="number" id="user-input">
+<button id="submit-button">提交</button>
+
+<p id="number"></p>
  <button id="add">加一</button>
  <button id="subtract">減一</button>
 
@@ -21,46 +24,50 @@
  const numberElement = document.getElementById("number");
  const addButton = document.getElementById("add");
  const subtractButton = document.getElementById("subtract");
+ const submitButton = document.getElementById("submit-button");
 
  let number = 0;
 
  // 顯示現在時間
  function updateTime() {
-  const now = new Date();
-  timeElement.textContent = now.toLocaleString();
+ const now = new Date();
+ timeElement.textContent = now.toLocaleString();
  }
 
  // 更新數字
  function updateNumber() {
-  numberElement.textContent = number;
+ numberElement.textContent = number;
  }
 
  // 加一
  addButton.addEventListener("click", () => {
-  number++;
-  updateNumber();
+ number++;
+ updateNumber();
  });
 
  // 減一
  subtractButton.addEventListener("click", () => {
-  number--;
-  updateNumber();
+ number--;
+ updateNumber();
  });
 
  // 使用者輸入數字
- numberInput.addEventListener("input", () => {
-  const inputNumber = parseInt(numberInput.value, 10);
-  if (isNaN(inputNumber)) {
-  return;
-  }
+ submitButton.addEventListener("click", () => {
+ const userNumber = parseInt(document.getElementById("user-input").value, 10);
+ if (isNaN(userNumber)) {
+ return;
+ }
 
-  number = inputNumber;
-  updateNumber();
+ number = userNumber;
+ updateNumber();
+
+ // 將使用者輸入的數值儲存至 localStorage
+ localStorage.setItem("userNumber", userNumber);
  });
 
  // 新增获取数字的函数
  function getNumber() {
-  return number;
+ return number;
  }
 
  // 初始化
