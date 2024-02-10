@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>顯示數字</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>優植牙醫診所</title>
 </head>
 <body>
-  <p>數字：</p>
-  <p id="number"></p>
+ <h1>優植牙醫診所</h1>
+ <h2>王志綱醫師</h2>
+ <h3>現在看診號碼</h3>
+ <p id="number"></p>
 
-  <script>
-    const numberElement = document.getElementById("number");
+ <script>
+  const numberElement = document.getElementById("number");
 
-    // 顯示數字
-    const showNumber = (number) => {
-      numberElement.textContent = number;
-    };
-  </script>
+  // 顯示現在時間
+  const showTime = () => {
+   const now = new Date();
+   const year = now.getFullYear();
+   const month = now.getMonth() + 1;
+   const day = now.getDate();
+   const hour = now.getHours();
+   const minute = now.getMinutes();
+   const second = now.getSeconds();
+   numberElement.textContent = `現在時間：${year}年${month}月${day}日 ${hour}:${minute}:${second}`;
+  };
+
+  // 每秒更新時間
+  setInterval(showTime, 1000);
+ </script>
 </body>
 </html>
