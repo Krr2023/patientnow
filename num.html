@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>優植牙醫診所看診進度</title>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>輸入號碼</title>
 </head>
 <body>
-<h1>優植牙醫診所</h1>
- <h2>王志綱醫師</h2>
- <h3>現在看診號碼</h3>
- <h4>${{ env.number }}</h4>
+ <form id="number-form">
+  <input type="number" id="user-input" name="number">
+  <button type="submit">提交</button>
+ </form>
 
- <script>
- const numberElement = document.getElementById("number");
+ <script>
+  const numberForm = document.getElementById("number-form");
 
- // 顯示現在時間
- const showTime = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1;
-  const day = now.getDate();
-  const hour = now.getHours();
-  const minute = now.getMinutes();
-  const second = now.getSeconds();
-  numberElement.textContent = `現在時間：${year}年${month}月${day}日 ${hour}:${minute}:${second}`;
- };
+  // 提交表單時將數字發送到 index.html
+  numberForm.addEventListener("submit", (event) => {
+   event.preventDefault(); // 防止表單提交刷新頁面
 
- // 每秒更新時間
- setInterval(showTime, 1000);
- </script>
+   const number = parseInt(document.getElementById("user-input").value, 10);
+   if (isNaN(number)) {
+    return;
+   }
+
+   // 將數字發送到 index.html
+   window.parent.postMessage(number, "*");
+  });
+ </script>
 </body>
 </html>
