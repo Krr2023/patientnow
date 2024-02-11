@@ -3,25 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Page</title>
+    <title>輸入</title>
 </head>
 <body>
-    <label for="inputText">输入文字：</label>
-    <input type="text" id="inputText">
-    
-    <script>
-        // 获取输入框和输出框
-        var inputText = document.getElementById("inputText");
-        var outputFrame = document.getElementById("outputFrame");
-
-        // 监听输入框内容改变事件
-        inputText.addEventListener("input", function() {
-            // 获取输入框内容并更新到输出框
-            outputFrame.srcdoc = inputText.value;
-        });
-    </script>
-
-    <br>
-    <iframe id="outputFrame" width="400" height="200"></iframe>
+    <form action="output.html" method="post">
+        <input type="text" name="input" placeholder="請輸入文字">
+        <input type="submit" value="送出">
+    </form>
 </body>
 </html>
