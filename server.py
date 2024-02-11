@@ -1,7 +1,6 @@
-serverimport http.server
-import socketserver
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
-class MyHandler(http.server.BaseHTTPRequestHandler):
+class MyHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_type = self.headers['content-type']
         if content_type == 'application/x-www-form-urlencoded':
@@ -15,6 +14,6 @@ class MyHandler(http.server.BaseHTTPRequestHandler):
 
 if __name__ == '__main__':
     port = 8000
-    server = socketserver.TCPServer(('', port), MyHandler)
+    server = HTTPServer(('', port), MyHandler)
     print('伺服器已啟動，正在監聽埠 {} ...'.format(port))
     server.serve_forever()
