@@ -16,15 +16,18 @@ const numberForm = document.getElementById("number-form");
 
 // 提交表單時將數字發送到 rec.js
 numberForm.addEventListener("submit", (event) => {
-    event.preventDefault(); // 防止表單提交刷新頁面
+  event.preventDefault(); // 防止表單提交刷新頁面
 
-    const number = parseInt(document.getElementById("user-input").value, 10);
-    if (isNaN(number)) {
-        return;
-    }
+  const number = parseInt(document.getElementById("user-input").value, 10);
+  if (isNaN(number)) {
+    return;
+  }
 
-    // 將數字發送到 rec.js
-    window.parent.postMessage(number, "*");
+  // 將數字發送到 rec.js
+  window.parent.postMessage(number, "*");
+
+  // 將數字發送到 console
+  console.log(number);
 });
 </script>
 </body>
