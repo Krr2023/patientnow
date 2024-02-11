@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Page</title>
+</head>
+<body>
+    <label for="inputText">输入文字：</label>
+    <input type="text" id="inputText" onkeyup="updateOutput()">
+    
+    <script>
+        function updateOutput() {
+            var inputText = document.getElementById("inputText").value;
+            var outputFrame = document.getElementById("outputFrame");
+            outputFrame.srcdoc = inputText;
+        }
+    </script>
+
+    <br>
+    <iframe id="outputFrame" width="400" height="200"></iframe>
+</body>
+</html>
