@@ -19,8 +19,8 @@ const numElement = document.getElementById("num");
 
 // 顯示現在時間
 function updateTime() {
-    const now = new Date();
-    timeElement.textContent = now.toLocaleString();
+  const now = new Date();
+  timeElement.textContent = now.toLocaleString();
 }
 
 // 初始化
@@ -31,11 +31,14 @@ setInterval(updateTime, 1000);
 
 // 監聽 localStorage 變化
 window.addEventListener("storage", (event) => {
-    if (event.key === "userNumber") {
-        // 更新顯示的數字
-        numElement.textContent = localStorage.getItem("userNumber");
-    }
+  if (event.key === "userNumber") {
+    // 更新顯示的數字
+    numElement.textContent = localStorage.getItem("userNumber");
+  }
 });
+
+// 將網頁內容發送到 console
+console.log(document.documentElement.outerHTML);
 </script>
 </body>
 </html>
