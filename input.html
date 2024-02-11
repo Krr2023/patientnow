@@ -7,14 +7,18 @@
 </head>
 <body>
     <label for="inputText">输入文字：</label>
-    <input type="text" id="inputText" onkeyup="updateOutput()">
+    <input type="text" id="inputText">
     
     <script>
-        function updateOutput() {
-            var inputText = document.getElementById("inputText").value;
-            var outputFrame = document.getElementById("outputFrame");
-            outputFrame.srcdoc = inputText;
-        }
+        // 获取输入框和输出框
+        var inputText = document.getElementById("inputText");
+        var outputFrame = document.getElementById("outputFrame");
+
+        // 监听输入框内容改变事件
+        inputText.addEventListener("input", function() {
+            // 获取输入框内容并更新到输出框
+            outputFrame.srcdoc = inputText.value;
+        });
     </script>
 
     <br>
