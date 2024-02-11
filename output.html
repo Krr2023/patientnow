@@ -5,5 +5,16 @@
     <title>Output</title>
 </head>
 <body>
-    <p id="output"></p>  </body>
+    <p id="output"></p>
+
+    <script>
+        // 获取URL中的参数（文本内容）
+        const urlParams = new URLSearchParams(window.location.search);
+        const inputText = urlParams.get('text');
+
+        // 将文本内容显示在输出元素中
+        const outputElement = document.getElementById("output");
+        outputElement.textContent = inputText;
+    </script>
+</body>
 </html>
