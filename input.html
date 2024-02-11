@@ -6,13 +6,15 @@
 </head>
 <body>
     <input type="text" id="input" onchange="updateOutput()">
+    <div id="output"></div> <!-- 添加一个用于显示输出的div -->
     <script>
         function updateOutput() {
             var input = document.getElementById("input").value;
+            var outputElement = document.getElementById("output");
 
-            // Ensure output element exists before accessing it
-            if (document.getElementById("output")) {
-                document.getElementById("output").innerHTML = input;
+            // 确保输出元素存在
+            if (outputElement) {
+                outputElement.innerHTML = input;
             }
         }
     </script>
