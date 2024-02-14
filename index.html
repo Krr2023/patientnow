@@ -1,44 +1,87 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>網頁顯示時間和數字</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>優植牙醫診所現在看診號碼</title>
+  <style>
+    /* 设置按钮的样式 */
+    button {
+      font-size: 18px;
+      padding: 20px 20px; /* 增加按钮的内边距 */
+      margin: 5px;
+      width: 100%; /* 按钮宽度占满整个宽度 */
+      height: 100px; /* 按钮高度增加到100px */
+      box-sizing: border-box; /* 让内边距和边框计入元素的总宽度 */
+      border: none; /* 去除按钮边框 */
+    }
+
+    /* 设置增加按钮样式 */
+    #increaseBtn {
+      background-color: rgba(255, 255, 187, 0.7); /* #FFFFBB 透明度70% */
+    }
+
+    /* 设置减少按钮样式 */
+    #decreaseBtn {
+      background-color: rgba(255, 183, 221, 0.7); /* #FFB7DD 透明度70% */
+    }
+
+    /* 设置提交按钮样式 */
+    #submitBtn {
+      background-color: rgba(187, 255, 238, 0.7); /* #BBFFEE 透明度70% */
+    }
+  </style>
 </head>
 <body>
-<h1>優植牙醫診所</h1>
-<h2>王志綱醫師</h2>
-<h3>現在看診號碼</h3>
-<p id="time"></p>
+  <h1>優植牙醫診所</h1>
+  <h2>王志綱醫師</h2>
+  <h3>現在看診號碼</h3>
 
-<span id="num"></span>
+  <!-- 输入框 -->
+  <input type="number" id="numberInput" value="0"> <!-- 默认值为0 -->
+  <br style="clear: both;"> <!-- 清除浮动 -->
+  <!-- 显示数字的段落 -->
+  <p id="displayNumber">这里将显示输入的数字</p>
 
-<script>
-const timeElement = document.getElementById("time");
-const numElement = document.getElementById("num");
+  <!-- 增加数值的按钮 -->
+  <button id="increaseBtn" onclick="increaseNumber()">增加</button>
+  <!-- 减少数值的按钮 -->
+  <button id="decreaseBtn" onclick="decreaseNumber()">减少</button>
+  <!-- 提交按钮 -->
+  <button id="submitBtn" onclick="updateNumber()">提交</button>
 
-// 顯示現在時間
-function updateTime() {
-  const now = new Date();
-  timeElement.textContent = now.toLocaleString();
-}
+  <script>
+    // 初始化页面时，从 localStorage 中获取已保存的值并更新显示
+    var savedNumber = localStorage.getItem('savedNumber');
+    if (savedNumber) {
+      document.getElementById('numberInput').value = savedNumber;
+      updateNumber();
+    }
 
-// 初始化
-updateTime();
+    // 增加数值的函数
+    function increaseNumber() {
+      var input = parseInt(document.getElementById('numberInput').value);
+      if (!isNaN(input)) { // 检查输入是否为有效数字
+        input++;
+        document.getElementById('numberInput').value = input;
+      }
+    }
 
-// 每秒更新時間
-setInterval(updateTime, 1000);
+    // 减少数值的函数
+    function decreaseNumber() {
+      var input = parseInt(document.getElementById('numberInput').value);
+      if (!isNaN(input)) { // 检查输入是否为有效数字
+        input--;
+        document.getElementById('numberInput').value = input;
+      }
+    }
 
-// 監聽 localStorage 變化
-window.addEventListener("storage", (event) => {
-  if (event.key === "userNumber") {
-    // 更新顯示的數字
-    numElement.textContent = localStorage.getItem("userNumber");
-  }
-});
-
-// 將網頁內容發送到 console
-console.log(document.documentElement.outerHTML);
-</script>
+    // 更新数字显示并保存到 localStorage
+    function updateNumber() {
+      var input = document.getElementById('numberInput').value;
+      document.getElementById('displayNumber').innerText = "输入的数字是：" + input;
+      localStorage.setItem('savedNumber', input);
+    }
+  </script>
 </body>
 </html>
