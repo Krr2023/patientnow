@@ -48,7 +48,7 @@
   <!-- 减少数值的按钮 -->
   <button id="decreaseBtn" onclick="decreaseNumber()">减少</button>
   <!-- 提交按钮 -->
-  <button id="submitBtn" onclick="updateNumber()">提交</button>
+  <button id="submitBtn" onclick="saveAsIndex()">提交</button>
 
   <script>
     // 初始化页面时，从 localStorage 中获取已保存的值并更新显示
@@ -81,6 +81,18 @@
       var input = document.getElementById('numberInput').value;
       document.getElementById('displayNumber').innerText = "输入的数字是：" + input;
       localStorage.setItem('savedNumber', input);
+    }
+
+    // 将文件另存为 index.html
+    function saveAsIndex() {
+      var inputContent = document.documentElement.outerHTML; // 获取整个页面的 HTML 内容
+      var blob = new Blob([inputContent], { type: "text/html" }); // 创建一个新的 Blob 对象
+      var url = URL.createObjectURL(blob); // 创建一个 URL 对象
+      var a = document.createElement('a'); // 创建一个 <a> 元素
+      a.href = url; // 设置 <a> 元素的 href 属性
+      a.download = 'index.html'; // 设置下载的文件名
+      a.click(); // 模拟点击下载链接
+      URL.revokeObjectURL(url); // 释放 URL 对象
     }
   </script>
 </body>
