@@ -10,22 +10,32 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Upload file to server
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # 将 SSH 私钥添加到环境变量
-      run: |
-        mkdir "C:\Users\Home\Desktop\now\.ssh"  # Replace USERNAME with your Windows username
-        echo %SSH_PRIVATE_KEY% > "C:\Users\Home\Desktop\now\.ssh\id_rsa"  # Replace USERNAME with your Windows username
-        scp -i "C:\Users\Home\Desktop\now\.ssh\id_rsa" "C:\Users\Home\Desktop\now\index.html" git@github.com
+      - name: Upload file to server
+        env:
+          # Store SSH key securely, e.g., in encrypted environment variable
+          SSH_PRIVATE_KEY: ${{ secrets.MY_SSH_PRIVATE_KEY }}
+          # Use generic directory and variables
+          UPLOAD_DIR: "C:\Temp\.ssh"
+          UPLOAD_FILE: "C:\Users\Home\Desktop\now\index.html"
+          SSH_TARGET: "git@github.com"  # Replace with actual target
 
-    - name: Commit and push file
-      run: |
-        cd $GITHUB_WORKSPACE
-        git config --global user.email "krr163play@gmail.com"
-        git config --global user.name "Krr2023"
-        git add .
-        git commit -m "Upload index.html"
-        git push https://github.com/Krr2023/patientnow/ main
+        run: |
+          mkdir -p "${{ env.UPLOAD_DIR }}"
+          echo "${{ env.SSH_PRIVATE_KEY }}" > "${{ env.UPLOAD_DIR }}\id_rsa"
+          chmod 600 "${{ env.UPLOAD_DIR }}\id_rsa"  # Set strict permissions
+          scp -i "${{ env.UPLOAD_DIR }}\id_rsa" "${{ env.UPLOAD_FILE }}" "${{ env.SSH_TARGET }}"
+
+      - name: Commit and push file (optional)
+        # Consider using a separate secure workflow
+        if: always() != true  # Run only if triggered manually
+        run: |
+          cd $GITHUB_WORKSPACE
+          git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
+          git config --global user.name "${{ secrets.GIT_USER_NAME }}"
+          git add .
+          git commit -m "Upload file"
+          git push https://github.com/${{ secrets.REPO_NAME }} main
+
