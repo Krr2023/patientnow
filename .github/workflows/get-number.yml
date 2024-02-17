@@ -13,22 +13,21 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-- name: Upload file to GitHub
-  run: |
-    git config --global user.email "krr163play@gmail.com"
-    git config --global user.name "krr2023"
-    git init
-    git add "C:\Users\Home\Desktop\now\index.html"
-    git commit -m "Add index.html"
-    git remote add origin https://github.com/Krr2023/patientnow/
-    git push -u origin master
-
+    - name: Upload file to GitHub
+      run: |
+        git config --global user.email "krr163play@gmail.com"
+        git config --global user.name "krr2023"
+        git init
+        git add "C:\Users\Home\Desktop\now\index.html"
+        git commit -m "Add index.html"
+        git remote add origin https://github.com/Krr2023/patientnow/
+        git push -u origin master
 
     - name: Commit and push file
       run: |
         cd $GITHUB_WORKSPACE
         git config --global user.email "krr163play@gmail.com"
-        git config --global user.name "GitHub Actions"
+        git config --global user.name "krr2023"
         git add .
         git commit -m "Upload index.html"
-        git push https://github.com/Krr2023/patientnow/ main
+        git push https://github.com/Krr2023/patientnow/
