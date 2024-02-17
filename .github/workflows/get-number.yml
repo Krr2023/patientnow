@@ -17,9 +17,9 @@ jobs:
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # 将 SSH 私钥添加到环境变量
       run: |
-        mkdir C:\Users\Home\Desktop\now\.ssh  # Replace USERNAME with your Windows username
-        echo %SSH_PRIVATE_KEY% > C:\Users\Home\Desktop\now\.ssh\id_rsa  # Replace USERNAME with your Windows username
-        scp -i C:\Users\Home\Desktop\now\.ssh\id_rsa C:\Users\Home\Downloads\index.html git@github.com
+        mkdir "C:\Users\Home\Desktop\now\.ssh"  # Replace USERNAME with your Windows username
+        echo %SSH_PRIVATE_KEY% > "C:\Users\Home\Desktop\now\.ssh\id_rsa"  # Replace USERNAME with your Windows username
+        scp -i "C:\Users\Home\Desktop\now\.ssh\id_rsa" "C:\Users\Home\Downloads\index.html" git@github.com
 
     - name: Commit and push file
       run: |
