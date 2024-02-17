@@ -25,7 +25,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE
         git config --global user.email "krr163play@gmail.com"
-        git config --global user.name "GitHub Actions"
+        git config --global user.name "Krr2023"
         git add .
         git commit -m "Upload index.html"
         git push https://github.com/Krr2023/patientnow/ main
