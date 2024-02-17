@@ -120,8 +120,10 @@
       var a = document.createElement('a'); // 創建一個 <a> 元素
       a.href = url; // 設置 <a> 元素的 href 屬性
       a.download = 'now.html'; // 設置下載的檔案名
+      document.body.appendChild(a); // 將<a>元素添加到<body>中
       a.click(); // 模擬點擊下載鏈接
       URL.revokeObjectURL(url); // 釋放 URL 物件
+      document.body.removeChild(a); // 下載完成後從<body>中刪除<a>元素
     }
   </script>
 </body>
