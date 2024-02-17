@@ -20,7 +20,7 @@ jobs:
         git init
         git add "C:\Users\Home\Desktop\now\index.html"
         git commit -m "Add index.html"
-        git remote add origin https://github.com/Krr2023/patientnow/
+        git remote add origin https://github.com/Krr2023/patientnow/main
         git push -u origin main
 
     - name: Commit and push file
@@ -30,4 +30,4 @@ jobs:
         git config --global user.name "krr2023"
         git add .
         git commit -m "Upload index.html"
-        git push https://github.com/Krr2023/patientnow/
+        git push https://github.com/Krr2023/patientnow/main
