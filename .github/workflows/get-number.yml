@@ -18,8 +18,8 @@ jobs:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # 将 SSH 私钥添加到环境变量
       run: |
         mkdir "C:\Users\Home\Desktop\now\.ssh"
-        echo %SSH_PRIVATE_KEY% > "C:\Users\Home\Desktop\now\.ssh\id_rsa"
-        scp -i "C:\Users\Home\Desktop\now\.ssh\id_rsa" "C:\Users\Home\Desktop\now\index.html" github.com
+        echo %SSH_PRIVATE_KEY% > "C:\Users\Home\Desktop\now\.ssh\sshkey"
+        scp -i "C:\Users\Home\Desktop\now\.ssh\sshkey" "C:\Users\Home\Desktop\now\index.html" github.com
 
     - name: Commit and push file
       run: |
