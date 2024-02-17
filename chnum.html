@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>優植牙醫診所現在看診號碼</title>
+  <style>
+    /* 设置按钮的样式 */
+    button {
+      font-size: 18px;
+      padding: 20px 20px; /* 增加按钮的内边距 */
+      margin: 5px;
+      width: 100%; /* 按钮宽度占满整个宽度 */
+      height: 100px; /* 按钮高度增加到100px */
+      box-sizing: border-box; /* 让内边距和边框计入元素的总宽度 */
+      border: none; /* 去除按钮边框 */
+    }
+
+    /* 设置增加按钮样式 */
+    #increaseBtn {
+      background-color: rgba(255, 255, 187, 0.7); /* #FFFFBB 透明度70% */
+    }
+
+    /* 设置减少按钮样式 */
+    #decreaseBtn {
+      background-color: rgba(255, 183, 221, 0.7); /* #FFB7DD 透明度70% */
+    }
+
+    /* 设置提交按钮样式 */
+    #submitBtn {
+      background-color: rgba(187, 255, 238, 0.7); /* #BBFFEE 透明度70% */
+    }
+
+    /* 设置隐藏样式 */
+    .hidden {
+      display: none;
+    }
+
+    /* 设置时间样式 */
+    #currentTime {
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 顯示當前時間 -->
+  <p id="currentTime"></p>
+  
+  <!-- 醫診所標題 -->
+  <h1>優植牙醫診所</h1>
+  <h2>王志綱醫師</h2>
+  <h3></h3>
+
+  <!-- 输入框 -->
+  <input type="number" id="numberInput" value="0"> <!-- 默认值为0 -->
+  <br style="clear: both;"> <!-- 清除浮动 -->
+  <!-- 显示数字的段落 -->
+  <p id="displayNumber">這裡將顯示輸入的數字</p>
+
+  <!-- 增加數值的按鈕 -->
+  <button id="increaseBtn" onclick="increaseNumber()">增加</button>
+  <!-- 減少數值的按鈕 -->
+  <button id="decreaseBtn" onclick="decreaseNumber()">減少</button>
+  <!-- 提交按鈕 -->
+  <button id="submitBtn" onclick="saveAndHide()">提交</button>
+
+  <script>
+    // 取得現在時間並格式化為 yyyy-mm-dd hh:mm:ss 的形式
+    var now = new Date();
+    var formattedTime = now.getFullYear() + '-' + (now.getMonth() + 1).toString().padStart(2, '0') + '-' + now.getDate().toString().padStart(2, '0') + ' ' + now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0') + ':' + now.getSeconds().toString().padStart(2, '0');
+    document.getElementById('currentTime').innerText = formattedTime;
+
+    // 初始化頁面時，從 localStorage 中獲取已保存的值並更新顯示
+    var savedNumber = localStorage.getItem('savedNumber');
+    if (savedNumber) {
+      document.getElementById('numberInput').value = savedNumber;
+      updateNumber(savedNumber); // 更新數字顯示
+    }
+
+    // 增加數值的函數
+    function increaseNumber() {
+      var input = parseInt(document.getElementById('numberInput').value);
+      if (!isNaN(input)) { // 檢查輸入是否為有效數字
+        input++;
+        document.getElementById('numberInput').value = input;
+      }
+    }
+
+    // 減少數值的函數
+    function decreaseNumber() {
+      var input = parseInt(document.getElementById('numberInput').value);
+      if (!isNaN(input)) { // 檢查輸入是否為有效數字
+        input--;
+        document.getElementById('numberInput').value = input;
+      }
+    }
+
+    // 更新數字顯示並保存到 localStorage
+    function updateNumber(input) {
+      document.getElementById('displayNumber').innerText = "現在看診號碼：" + input;
+      localStorage.setItem('savedNumber', input);
+    }
+
+    // 將檔案另存為 index.html
+    function saveAndHide() {
+      // 更新數字顯示
+      var input = document.getElementById('numberInput').value;
+      updateNumber(input);
+
+      // 隱藏輸入框和按鈕
+      document.getElementById('numberInput').classList.add('hidden');
+      document.getElementById('increaseBtn').classList.add('hidden');
+      document.getElementById('decreaseBtn').classList.add('hidden');
+      document.getElementById('submitBtn').classList.add('hidden');
+
+      // 創建並保存檔案
+      var inputContent = document.documentElement.outerHTML; // 獲取整個頁面的 HTML 內容
+      var blob = new Blob([inputContent], { type: "text/html" }); // 創建一個新的 Blob 物件
+      var url = URL.createObjectURL(blob); // 創建一個 URL 物件
+      var a = document.createElement('a'); // 創建一個 <a> 元素
+      a.href = url; // 設置 <a> 元素的 href 屬性
+      a.download = 'index.html'; // 設置下載的檔案名
+      a.click(); // 模擬點擊下載鏈接
+      URL.revokeObjectURL(url); // 釋放 URL 物件
+    }
+  </script>
+</body>
+</html>
