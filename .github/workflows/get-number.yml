@@ -13,9 +13,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Copy file to repository
+    - name: Upload file to server
+      run: scp -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} file:///C:/Users/Home/Desktop/now/chnum.html user@your-server-ip:/path/to/remote/directory/
+
+    - name: Commit and push file
       run: |
-        cp C:/Users/Home/Downloads/index.html $GITHUB_WORKSPACE
         cd $GITHUB_WORKSPACE
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "GitHub Actions"
