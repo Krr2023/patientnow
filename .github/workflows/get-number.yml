@@ -3,7 +3,7 @@ name: Upload File
 on:
   push:
     branches:
-      - main  # 替换成您的主要分支名称
+      - main
 
 jobs:
   upload:
@@ -14,7 +14,13 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Upload file to server
-      run: scp -i ${{ secrets.SSH_PRIVATE_KEY_PATH }} file:///C:/Users/Home/Desktop/now/chnum.html user@your-server-ip:/path/to/remote/directory/
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # 将 SSH 私钥添加到环境变量
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa  # 将 SSH 私钥写入文件
+        chmod 600 ~/.ssh/id_rsa  # 设置正确的权限
+        scp -i ~/.ssh/id_rsa file:///C:/Users/Home/Desktop/now/chnum.html user@your-server-ip:/path/to/remote/directory/
 
     - name: Commit and push file
       run: |
