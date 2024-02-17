@@ -20,12 +20,12 @@ jobs:
         mkdir -p ~/.ssh
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa  # 将 SSH 私钥写入文件
         chmod 600 ~/.ssh/id_rsa  # 设置正确的权限
-        scp -i ~/.ssh/id_rsa file:///C:/Users/Home/Desktop/now/chnum.html user@your-server-ip:/path/to/remote/directory/
+        scp -i ~/.ssh/id_rsa file:///C:\Users\Home\Downloads\index.html user@your-server-ip:/path/to/remote/directory/
 
     - name: Commit and push file
       run: |
         cd $GITHUB_WORKSPACE
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.email "krr163play@gmail.com"
         git config --global user.name "GitHub Actions"
         git add .
         git commit -m "Upload index.html"
