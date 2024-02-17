@@ -19,7 +19,7 @@ jobs:
       run: |
         mkdir "C:\Users\Home\Desktop\now\.ssh"  # Replace USERNAME with your Windows username
         echo %SSH_PRIVATE_KEY% > "C:\Users\Home\Desktop\now\.ssh\id_rsa"  # Replace USERNAME with your Windows username
-        scp -i "C:\Users\Home\Desktop\now\.ssh\id_rsa" "C:\Users\Home\Desktop\now\index.html"  git@github.com
+        scp -i "C:\Users\Home\Desktop\now\.ssh\id_rsa" "C:\Users\Home\Desktop\now\index.html" git@github.com
 
     - name: Commit and push file
       run: |
