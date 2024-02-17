@@ -13,13 +13,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Upload file to server
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}  # 将 SSH 私钥添加到环境变量
-      run: |
-        mkdir "C:\Users\Home\Desktop\now\.ssh"
-        echo %SSH_PRIVATE_KEY% > "C:\Users\Home\Desktop\now\.ssh\sshkey"
-        scp -i "C:\Users\Home\Desktop\now\.ssh\sshkey" "C:\Users\Home\Desktop\now\index.html" github.com
+- name: Upload file to GitHub
+  run: |
+    git config --global user.email "krr163play@gmail.com"
+    git config --global user.name "krr2023"
+    git init
+    git add "C:\Users\Home\Desktop\now\index.html"
+    git commit -m "Add index.html"
+    git remote add origin https://github.com/Krr2023/patientnow/
+    git push -u origin master
+
 
     - name: Commit and push file
       run: |
