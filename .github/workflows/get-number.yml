@@ -19,7 +19,7 @@ jobs:
       run: |
         mkdir "C:\Users\Home\Desktop\now\.ssh"
         echo %SSH_PRIVATE_KEY% > "C:\Users\Home\Desktop\now\.ssh\id_rsa"
-        scp -i "C:\Users\Home\Desktop\now\.ssh\id_rsa" "C:\Users\Home\Desktop\now\index.html" user@your-server-ip:/path/to/remote/directory/
+        scp -i "C:\Users\Home\Desktop\now\.ssh\id_rsa" "C:\Users\Home\Desktop\now\index.html" github.com
 
     - name: Commit and push file
       run: |
