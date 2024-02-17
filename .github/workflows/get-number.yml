@@ -21,7 +21,7 @@ jobs:
         git add "C:\Users\Home\Desktop\now\index.html"
         git commit -m "Add index.html"
         git remote add origin https://github.com/Krr2023/patientnow/
-        git push -u origin master
+        git push -u origin main
 
     - name: Commit and push file
       run: |
