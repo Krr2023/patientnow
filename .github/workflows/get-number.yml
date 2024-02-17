@@ -1,27 +1,24 @@
-name: Get Number
+name: Upload File
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main  # 替换成您的主要分支名称
 
 jobs:
-  get-number:
+  upload:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-    - name: Get number
+    - name: Copy file to repository
       run: |
-        curl -X GET https://api.netlify.com/api/v1/sites/YOUR_SITE_ID/functions/get-number
-
-    - name: Save number
-      run: |
-        echo ${{ steps.get-number.outputs.number }} > num.txt
-
-    - name: Deploy num.html
-      uses: netlify/actions/deploy@v1
-        with:
-          site_id: YOUR_SITE_ID
-          authToken: YOUR_ACCESS_TOKEN
-          production: true
-
+        cp C:/Users/Home/Downloads/index.html $GITHUB_WORKSPACE
+        cd $GITHUB_WORKSPACE
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git config --global user.name "GitHub Actions"
+        git add .
+        git commit -m "Upload index.html"
+        git push https://github.com/Krr2023/patientnow/ main
